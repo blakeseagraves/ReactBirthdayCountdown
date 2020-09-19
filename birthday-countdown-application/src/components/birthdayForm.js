@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
+import Clock from "./clock";
 
 class BirthdayForm extends Component {
 
@@ -8,10 +9,12 @@ class BirthdayForm extends Component {
         super(props);
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleGenerate = this.handleGenerate.bind(this);
+        this.handleChangeDate = this.handleChangeDate.bind(this);
 
         this.state =  {
             startDate: new Date(),
-
+            formCompleted: false
         }
     }
 
@@ -19,16 +22,43 @@ class BirthdayForm extends Component {
         this.setState({
             startDate: date
         })
+        console.log("set date," , date)
     }
+    
+    handleGenerate() {
+        console.log("GENERATE CICKED");
+        this.setState({
+            formCompleted: true
+        });
+    }
+
+    handleChangeDate() {
+        this.setState({
+            formCompleted: false
+        }); 
+    }
+
     
     render() {
         return (
             <div>
-                <h1>Birthday Countdown</h1>
-                <DatePicker 
-                    selected={this.state.startDate}
-                    onChange={this.handleChange}
-                />
+                {
+                    this.state.formCompleted ? 
+                        <div>
+                            <Clock birthdayFormState={this.state} />
+                            <a onClick={this.handleChangeDate}>Change Date</a>
+                        </div>
+                    :
+                        <div>
+                            <h1>Birthday Countdown</h1>
+                            <DatePicker 
+                                selected={this.state.startDate}
+                                onChange={this.handleChange}
+                            />
+                            <a onClick={this.handleGenerate}>Generate Countdown</a>
+                        </div>
+                }
+                
             </div>
         )
     }
