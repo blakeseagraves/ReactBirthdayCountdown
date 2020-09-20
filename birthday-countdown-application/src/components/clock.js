@@ -15,6 +15,8 @@ class Clock extends Component {
 
         this.getTimeRemaining = this.getTimeRemaining.bind(this);
         this.getAge = this.getAge.bind(this);
+
+        this.noBirthYear = new Date(this.birthday).getFullYear() >= new Date().getFullYear();
     
     }
 
@@ -84,6 +86,18 @@ class Clock extends Component {
         clearInterval(this.timer);
     }
 
+    renderMessage() {
+        if (this.noBirthYear) {
+            return (
+                <h3>until your birthday!</h3>
+            )
+        } else {
+            return (
+            <h4>remaining until you are {this.getAge()}</h4>
+            )
+        }
+    }
+
     
     render() {
         const data = this.state.timeRemaining
@@ -104,7 +118,7 @@ class Clock extends Component {
                                 <div>SECS {data.seconds}</div>
                             </div>
                             <div>
-                                {<h3>remaining until you are {this.getAge()}</h3>}
+                                {this.renderMessage()}
                             </div>
                         </div>
                 }
@@ -112,13 +126,6 @@ class Clock extends Component {
             </div>
         )
     }
-
-    // componentDidMount() {
-    //     this.birthday = this.props.birthdayFormState.startDate.toString();
-    //     console.log("componentDidMount", this.birthday)
-    //     console.log("DATA:" , this.state.timeRemaining)
-    // }
-
 }
 
 
