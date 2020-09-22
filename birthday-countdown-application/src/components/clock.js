@@ -89,7 +89,7 @@ class Clock extends Component {
     renderMessage() {
         if (this.noBirthYear) {
             return (
-                <h3>until your birthday!</h3>
+                <h3>Remaining until your birthday!</h3>
             )
         } else {
             return (
@@ -103,24 +103,27 @@ class Clock extends Component {
         const data = this.state.timeRemaining
 
         return (
-            <div className="countdown">
+            <div>
                 {
-                   this.state.timeRemaining == 0 ?                  
-                        <div className="message-container">
-                            <p className="message-container__title">Countdown Complete!</p>
-                            <p className="message-container__message">HAPPY BIRTHDAY!!!</p>
-                            
-                        </div>
+                   this.state.timeRemaining == 0 ?  
+                        <div className="countdown">               
+                            <div className="message-container">
+                                <p className="message-container__title">Countdown Complete!</p>
+                                <p className="message-container__message">HAPPY BIRTHDAY!!!</p>
+                            </div>
+                        </div> 
                         :
                         <div>
-                            <ul className="countdown__clock">
-                                <li>DAYS<p>{data.days}</p></li>
-                                <li>HRS<p>{data.hours}</p></li>
-                                <li>MINS<p>{data.minutes}</p></li>
-                                <li>SECS<p>{data.seconds}</p></li>
-                            </ul>
-                            <div>
-                                {this.renderMessage()}
+                            <div className="countdown">
+                                <ul className="countdown__clock">
+                                    <li>DAYS<p>{data.days}</p></li>
+                                    <li>HRS<p>{data.hours}</p></li>
+                                    <li>MINS<p>{data.minutes}</p></li>
+                                    <li>SECS<p>{data.seconds}</p></li>
+                                </ul>
+                            </div>
+                            <div className="until-container">
+                                    {this.renderMessage()}
                             </div>
                         </div>
                 }

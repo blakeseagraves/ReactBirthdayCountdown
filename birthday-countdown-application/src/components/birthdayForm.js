@@ -25,11 +25,12 @@ class BirthdayForm extends Component {
         console.log("set date," , date)
     }
     
-    handleGenerate() {
+    handleGenerate(event) {
         console.log("GENERATE CICKED");
         this.setState({
             formCompleted: true
         });
+        event.preventDefault();
     }
 
     handleChangeDate() {
@@ -41,24 +42,29 @@ class BirthdayForm extends Component {
     
     render() {
         return (
-            <div>
+            <form onSubmit={this.handleGenerate} className="birthday-container">
                 {
                     this.state.formCompleted ? 
-                        <div>
+                        
+                        <div className="clock-container">
                             <Clock birthdayFormState={this.state} />
                             <a className="change-date" onClick={this.handleChangeDate}>Change Date</a>
                         </div>
                     :
-                        <div>
+                        <div className="date-picker-container">
                             <DatePicker 
+                                className="date-picker"
                                 selected={this.state.startDate}
                                 onChange={this.handleChange}
                             />
-                            <a onClick={this.handleGenerate}>Generate Countdown</a>
+                            <div className="submit-container">
+                            <input type="submit" value="Generate Countdown" />
+                            </div>
+                            
                         </div>
                 }
                 
-            </div>
+            </form>
         )
     }
 }
