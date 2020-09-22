@@ -46,11 +46,10 @@ class BirthdayForm extends Component {
                     this.state.formCompleted ? 
                         <div>
                             <Clock birthdayFormState={this.state} />
-                            <a onClick={this.handleChangeDate}>Change Date</a>
+                            <a className="change-date" onClick={this.handleChangeDate}>Change Date</a>
                         </div>
                     :
                         <div>
-                            <h1>Birthday Countdown</h1>
                             <DatePicker 
                                 selected={this.state.startDate}
                                 onChange={this.handleChange}
